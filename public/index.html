@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Candlestick Charts examples</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<h1>Candlestick chart Demo</h1>
+	<div class="grapgh-wrapper">
+		<h3>1. Load  static data with default options </h3>
+		<canvas id="candleStickChart">
+			Your browser does not support the HTML5 canvas tag.
+		</canvas>
+		<div class="loading" id="loading">Loading, Please wait ...</div>
+	</div>
+
+	<div class="grapgh-wrapper">
+		<h3>2. Load data from provided endpoint with different options </h3>
+		<canvas id="candleStickChart-1">
+			Your browser does not support the HTML5 canvas tag.
+		</canvas>
+		<div class="loading" id="loading-1">Loading, Please wait ...</div>
+	</div>
+
+	<script type="text/javascript" src="candleStickChart.js"></script>
+	<script type="text/javascript">
+		(function() {
+			//Local server data fetching
+			fetch(window.location.href+"graphData")
+			  .then((resp) => resp.json()) // Transform the data into json
+			  .then(function(data) {
+			  		//Remove loadeing
+			  		document.getElementById('loading').remove()
+			  		
+				    var graph = new candleStickChart({
+				    	canvasId : 'candleStickChart',
+				    	width : 900,
+				    	height : 400
+				    });
+					graph.draw(data.data);
+			   })
+
+
+			 // Remote server data fetching with option changes
+			 fetch("https://api.uat.fno.co/timeseries/NSE_FO/NIFTY19JUNFUT?series=eq&interval=MINUTE_1&startdate=2019-02-12T12:22:53.605Z&enddate=2019-03-12T12:22:53.605Z")
+			  .then((resp) => resp.json()) // Transform the data into json
+			  .then(function(data) {
+			  		//Remove loadeing
+			  		document.getElementById('loading-1').remove()
+			  		
+				    var graph = new candleStickChart({
+				    	canvasId : 'candleStickChart-1',
+				    	width : 1100,
+				    	height : 300,
+				    	bottomMargin : 50,
+				    	leftMargin : 50,
+				    	rightMargin : 50,
+				    	increasingTrendColor : '#333333',
+				    	deccreasingTrendColor : '#cccccc',
+				    	candleWidth : 6,
+				    	lineWidth : 1,
+				    	candleLRMargin : 3,
+				    });
+					graph.draw(data.data);
+			   })
+		})();
+	</script>
+</body>
+</html>

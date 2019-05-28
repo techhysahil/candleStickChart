@@ -1,0 +1,28 @@
+/*Reset*/
+html,body{
+	padding : 0px;
+	margin: 0px;
+	font-family: serif;
+}
+h1{
+	color: #646969;
+    text-align: center;
+}
+
+h3{
+	color: #5f5858;
+    margin-bottom: 30px;
+}
+
+.grapgh-wrapper{
+	position: relative;
+	overflow: auto;
+	margin: 20px;
+}
+
+.grapgh-wrapper .loading{
+	 position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
